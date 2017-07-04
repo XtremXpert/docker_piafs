@@ -1,7 +1,7 @@
 # docker run -d --volumes-from piafs-data --link mysql-piafs:mysql -p 80:80 demers/piafs-28juin2017
 PIAFS-291-28juin2017:
   ports:
-  - 20520:80/tcp
+  - 80:80/tcp
   labels:
     io.rancher.sidekicks: PIAFS-291-28juin2017-data
     io.rancher.container.pull_image: always
