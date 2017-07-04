@@ -1,3 +1,6 @@
+# Installation de Piwigo 2.9.1
+# Installation des plugins Community et Charlies
+
 # docker run --name mysql-piafs-data -d mysql false
 # docker run -d --name piafs-data demers/piafs-24juin2017 false
 # docker run --volumes-from mysql-piafs-data --name mysql-piafs -e MYSQL_USER=piafs -e MYSQL_PASSWORD=piafs -e MYSQL_DATABASE=piafs -e MYSQL_ROOT_PASSWORD=piafs -d mysql
@@ -18,13 +21,21 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     # wget -q -O piafs.zip https://github.com/linuq/PIAFS/archive/master.zip && \
-    wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=latest && \
+    # wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=latest && \
+    wget -q -O piwigo.zip http://piwigo.org/download/dlcounter.php?code=2.9.1 && \
     unzip piwigo.zip && \
     mv piwigo/* /var/www/html && \
+    # Installation du plugin Community http://fr.piwigo.org/ext/extension_view.php?eid=303
+    wget -q -O community.zip http://fr.piwigo.org/ext/download.php?rid=6346 && \
+    unzip -q community.zip -d /var/www/html/plugins/ && \
+    # Installation du plugin Charlies http://fr.piwigo.org/ext/extension_view.php?eid=119
+    wget -q -O charlies.zip http://fr.piwigo.org/ext/download.php?rid=6143 && \
+    unzip -q charlies.zip -d /var/www/html/plugins/ && \
+
     chown -R www-data:www-data /var/www/html && \
-    rm -r piwigo* && \
+    rm piwigo.zip community.zip charlies.zip && \
 	chmod +x /apache.sh && \
-    rm /var/www/html/index.html
+    rm -f /var/www/html/index.html
 VOLUME ["/var/www/html/galleries", "/var/www/html/themes", "/var/www/html/plugins", "/var/www/html/local"]
 EXPOSE 80
 CMD ["/apache.sh"]
