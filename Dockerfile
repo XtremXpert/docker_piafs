@@ -31,9 +31,17 @@ RUN apt-get update && \
     # Installation du plugin Charlies http://fr.piwigo.org/ext/extension_view.php?eid=119
     wget -q -O charlies.zip http://fr.piwigo.org/ext/download.php?rid=6143 && \
     unzip -q charlies.zip -d /var/www/html/plugins/ && \
-
+    # Aller chercher les plugins faits par les étudiants à l'hiver 2017.
+    wget -q -O plugins_etudiants.zip https://github.com/linuq/PIAFS/archive/master.zip && \
+    unzip -q plugins_etudiants.zip -d /tmp/ && \
+    cp -R /tmp/PIAFS-master/src/plugins/LocalFilesEditor /var/www/html/plugins/ && \
+    cp -R /tmp/PIAFS-master/src/plugins/editText /var/www/html/plugins/ && \
+    cp -R /tmp/PIAFS-master/src/plugins/medicMonitor /var/www/html/plugins/ && \
+    cp -R /tmp/PIAFS-master/src/plugins/editText /var/www/html/plugins/ && \
+    cp -R /tmp/PIAFS-master/src/plugins/userInfo /var/www/html/plugins/ && \
+    rm -f -r /tmp/PIAFS-master && \
     chown -R www-data:www-data /var/www/html && \
-    rm piwigo.zip community.zip charlies.zip && \
+    rm -f piwigo.zip community.zip charlies.zip plugins_etudiants.zip && \
 	chmod +x /apache.sh && \
     rm -f /var/www/html/index.html
 VOLUME ["/var/www/html/galleries", "/var/www/html/themes", "/var/www/html/plugins", "/var/www/html/local"]
