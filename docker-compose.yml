@@ -8,7 +8,7 @@ PIAFS-291-28juin2017:
   tty: true
   image: demers/piafs_28juin2017
   links:
-  - DB:mariadb
+  - DB:mysql
   stdin_open: true
 # docker run --volumes-from mysql-piafs-data --name mysql-piafs -e MYSQL_USER=piafs -e MYSQL_PASSWORD=piafs -e MYSQL_DATABASE=piafs -e MYSQL_ROOT_PASSWORD=piafs -d mysql
 DB:
@@ -17,12 +17,12 @@ DB:
     MYSQL_PASSWORD: piafs-db-pass
     MYSQL_ROOT_PASSWORD: piafs-root-pass
     MYSQL_USER: piafs-db-user
-  domainname: piafs-mariadb
+  domainname: piafs-mysql
   labels:
     io.rancher.sidekicks: DB-data
     io.rancher.container.pull_image: always
   tty: true
-  image: mariadb
+  image: mysql
   stdin_open: true
 # docker run -d --name piafs-data demers/piafs-28juin2017 false
 PIAFS-291-28juin2017-data:
@@ -34,7 +34,7 @@ PIAFS-291-28juin2017-data:
   tty: true
   image: demers/piafs_28juin2017
   links:
-  - DB:mariadb
+  - DB:mysql
   stdin_open: true
 # docker run --name mysql-piafs-data -d mysql false
 DB-data:
@@ -44,9 +44,9 @@ DB-data:
   command:
   - /bin/true
   tty: true
-  image: mariadb
+  image: mysql
   volumes:
-  - /home/linuq/PIAFS/mariadb:/var/lib/mariadb
+  - /home/linuq/PIAFS/mysql:/var/lib/mysql
   volumes_from:
   - DB
   stdin_open: true
