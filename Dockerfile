@@ -28,6 +28,7 @@ RUN apt-get update \
 	imagemagick \
 	libapache2-mod-php7.0 \
 	mediainfo \
+	mysql-client \
 	php7.0-gd \
 	php7.0-mbstring \
 	php7.0-mysql \
