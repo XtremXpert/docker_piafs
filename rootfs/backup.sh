@@ -14,5 +14,5 @@ duplicity remove-older-than 60D --force file:///backups/plugins
 duplicity --full-if-older-than 30D --no-encryption /var/www/html/upload file:///backups/upload
 duplicity remove-older-than 60D --force file:///backups/upload
 
-mysqldump -u $DB_USER --password='$DB_PASS' -h $DB_HOST $DB_NAME --add-drop-table --add-locks --extended-insert --lock-tables > /backups/dump.sql
+mysqldump -u $DB_USER --password=$DB_PASS -h $DB_HOST $DB_NAME --add-drop-table --add-locks --extended-insert --lock-tables > /backups/dump.sql
 
