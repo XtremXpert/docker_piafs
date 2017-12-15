@@ -59,6 +59,7 @@ RUN wget -q -O community.zip http://fr.piwigo.org/ext/download.php?rid=6346 \
     && rm -f piwigo.zip community.zip charlies.zip plugins_etudiants.zip \
     && chmod +x /entrypoint.sh \
     && chmod +x /backup.sh \
+    && chmod +x /restore.sh \
     && rm -f /var/www/html/index.html
 
 VOLUME ["/var/www/html/galleries", "/var/www/html/themes", "/var/www/html/plugins", "/var/www/html/local", "/var/www/html/upload", "/backups"]
